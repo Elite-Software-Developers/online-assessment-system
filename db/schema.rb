@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_27_202022) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_03_121937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_202022) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "correct_answers", force: :cascade do |t|
+    t.string "content"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_correct_answers_on_question_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -54,7 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_202022) do
   create_table "questions", force: :cascade do |t|
     t.string "question"
     t.bigint "assessment_id"
-    t.integer "correct_answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assessment_id"], name: "index_questions_on_assessment_id"
@@ -82,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_202022) do
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "correct_answers", "questions"
   add_foreign_key "feedbacks", "questions"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "invitations", "assessments"
