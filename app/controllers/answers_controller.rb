@@ -36,7 +36,7 @@ class AnswersController < ApplicationController
 
     def question_answers 
         # question = Question.find(params[:question_id]) 
-        answers = Question.find_by(question_id: params[:question_id]) 
+        answers = Answer.find_by(question_id: params[:question_id]) 
         render json: answers, status: :ok 
     end
 
