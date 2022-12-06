@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :correct_answers
   resources :feedbacks
   resources :student_results
   resources :invitations
